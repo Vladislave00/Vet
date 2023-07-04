@@ -137,6 +137,15 @@ public class AdminController {
     private Button submitDocButton;
 
     @FXML
+    private Button backD;
+
+    @FXML
+    private Button backN;
+
+    @FXML
+    private Button backP;
+
+    @FXML
     void initialize() {
         changePasswordButton.setOnAction(actionEvent -> {
             changePasswordPane.setVisible(true);
@@ -237,6 +246,16 @@ public class AdminController {
 
         backButtonReg.setOnAction(actionEvent -> {
             regDocPane.setVisible(false);
+        });
+
+        backP.setOnAction(actionEvent -> {
+            changePasswordPane.setVisible(false);
+        });
+        backD.setOnAction(actionEvent -> {
+            changeDataPane.setVisible(false);
+        });
+        backN.setOnAction(actionEvent -> {
+            changeNickPane.setVisible(false);
         });
 
         submitDocButton.setOnAction(actionEvent -> {

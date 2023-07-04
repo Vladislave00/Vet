@@ -110,9 +110,28 @@ public class UserController {
     private Label roleLabel;
 
     @FXML
+    private Button backD;
+
+    @FXML
+    private Button backN;
+
+    @FXML
+    private Button backP;
+
+
+    @FXML
     void initialize() {
         changePasswordButton.setOnAction(actionEvent -> {
             changePasswordPane.setVisible(true);
+        });
+        backP.setOnAction(actionEvent -> {
+            changePasswordPane.setVisible(false);
+        });
+        backD.setOnAction(actionEvent -> {
+            changeDataPane.setVisible(false);
+        });
+        backN.setOnAction(actionEvent -> {
+            changeNickPane.setVisible(false);
         });
         changePasswordSubmit.setOnAction(actionEvent ->{
             String old = oldPassword.getText();
@@ -137,6 +156,7 @@ public class UserController {
         changeNameButton.setOnAction(actionEvent -> {
             changeNickPane.setVisible(true);
         });
+
         changeUsernameSubmit.setOnAction(actionEvent ->{
             String p = passwordUsername.getText();
             String nick = newUsername.getText();

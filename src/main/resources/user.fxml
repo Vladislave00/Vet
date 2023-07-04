@@ -44,6 +44,7 @@
             <TextField fx:id="oldPassword" layoutX="326.0" layoutY="159.0" promptText="Старый пароль" />
             <TextField fx:id="nawPassword" layoutX="326.0" layoutY="218.0" promptText="Новый пароль" />
             <Button fx:id="changePasswordSubmit" layoutX="357.0" layoutY="273.0" mnemonicParsing="false" text="Подтвердить" />
+            <Button fx:id="backP" layoutX="33.0" layoutY="14.0" mnemonicParsing="false" text="Назад" />
          </children>
       </AnchorPane>
       <AnchorPane fx:id="changeNickPane" layoutX="10.0" layoutY="110.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: WHITE;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0">
@@ -51,6 +52,7 @@
             <TextField fx:id="newUsername" layoutX="326.0" layoutY="159.0" promptText="Новый ник" />
             <TextField fx:id="passwordUsername" layoutX="326.0" layoutY="218.0" promptText="Пароль" />
             <Button fx:id="changeUsernameSubmit" layoutX="357.0" layoutY="273.0" mnemonicParsing="false" text="Подтвердить" />
+            <Button fx:id="backN" layoutX="25.0" layoutY="15.0" mnemonicParsing="false" text="Назад" />
          </children>
       </AnchorPane>
       <AnchorPane fx:id="changeDataPane" layoutX="10.0" layoutY="110.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: WHITE;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0">
@@ -60,6 +62,7 @@
             <Button fx:id="changeDataSubmit" layoutX="357.0" layoutY="273.0" mnemonicParsing="false" text="Подтвердить" />
             <TextField fx:id="newAddress" layoutX="325.0" layoutY="127.0" promptText="Новый адрес" />
             <TextField fx:id="newPhone" layoutX="326.0" layoutY="171.0" promptText="Новый телефон" />
+            <Button fx:id="backD" layoutX="24.0" layoutY="14.0" mnemonicParsing="false" text="Назад" />
          </children>
       </AnchorPane>
       <AnchorPane fx:id="profilePane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: WHITE;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0">
