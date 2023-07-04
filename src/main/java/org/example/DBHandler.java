@@ -41,7 +41,7 @@ public class DBHandler {
 
     public void signup(User user) throws SQLException, NoSuchAlgorithmException, InvalidKeySpecException {
         if (exists(user.getUsername())) return;
-        String insert = "INSERT INTO Users(username, password, role, name, address, number) VALUES ('" + user.getUsername() + "','" + passwordHashing(user.getPassword()) + "', 1,'" + user.getName() + "','" + user.getAddress() + "','" + user.getNumber() + "')";
+        String insert = "INSERT INTO Users(username, password, role, name, address, number) VALUES ('" + user.getUsername() + "','" + passwordHashing(user.getPassword()) + "','" + user.getRole() + "','" + user.getName() + "','" + user.getAddress() + "','" + user.getNumber() + "')";
         PreparedStatement prst = connection.prepareStatement(insert);
         prst.executeUpdate();
     }

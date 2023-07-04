@@ -123,6 +123,7 @@ public class UserController {
                     DBHandler dbHandler = new DBHandler();
                     try {
                         dbHandler.changePassword(User.USER, newP);
+                        User.USER.setPassword(newP);
                     } catch (SQLException | NoSuchAlgorithmException | InvalidKeySpecException e) {
                         throw new RuntimeException(e);
                     }
@@ -136,7 +137,7 @@ public class UserController {
         changeNameButton.setOnAction(actionEvent -> {
             changeNickPane.setVisible(true);
         });
-        changePasswordSubmit.setOnAction(actionEvent ->{
+        changeUsernameSubmit.setOnAction(actionEvent ->{
             String p = passwordUsername.getText();
             String nick = newUsername.getText();
 
@@ -145,6 +146,7 @@ public class UserController {
                     DBHandler dbHandler = new DBHandler();
                     try {
                         dbHandler.changeName(User.USER, nick);
+                        User.USER.setUsername(nick);
                     } catch (SQLException e) {
                         throw new RuntimeException(e);
                     }
@@ -169,6 +171,9 @@ public class UserController {
                     DBHandler dbHandler = new DBHandler();
                     try {
                         dbHandler.changeData(User.USER, newname, newAddr, newNum);
+                        User.USER.setName(newname);
+                        User.USER.setAddress(newAddr);
+                        User.USER.setNumber(newNum);
                     } catch (SQLException e) {
                         throw new RuntimeException(e);
                     }

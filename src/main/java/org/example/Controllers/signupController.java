@@ -95,11 +95,7 @@ public class signupController {
             DBHandler dbHandler = new DBHandler();
             User user = new User(loginField.getText(), passwordField.getText(), 1, nameField.getText(), addressField.getText(), numberField.getText());
             dbHandler.signup(user);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException(e);
-        } catch (InvalidKeySpecException e) {
+        } catch (SQLException | NoSuchAlgorithmException | InvalidKeySpecException e) {
             throw new RuntimeException(e);
         }
     }
