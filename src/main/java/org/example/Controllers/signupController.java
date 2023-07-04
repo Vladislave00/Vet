@@ -11,6 +11,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import org.example.DBHandler;
@@ -46,29 +47,50 @@ public class signupController {
     private Button signInButton;
 
     @FXML
+    private Label errorLaber;
+
+    @FXML
+    private Label errorLaber1;
+
+    @FXML
     void initialize() {
         DBHandler.getConnection();
 
         signInButton.setOnAction(actionEvent -> {
-            signUpNewUser();
+            if (!passwordField.equals(passwordField1)){
+                errorLaber1.setVisible(false);
+                errorLaber.setVisible(true);
+            } else {
+                try {
+                    if (DBHandler.exists(loginField.getText())) {
+                        errorLaber.setVisible(false);
+                        errorLaber1.setVisible(true);
+                    } else {
+                        signUpNewUser();
 
-            signInButton.getScene().getWindow().hide();
+                        signInButton.getScene().getWindow().hide();
 
-            FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(getClass().getResource("/login.fxml"));
-            try {
-                fxmlLoader.load();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
+                        FXMLLoader fxmlLoader = new FXMLLoader();
+                        fxmlLoader.setLocation(getClass().getResource("/login.fxml"));
+                        try {
+                            fxmlLoader.load();
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
+                        Parent root = fxmlLoader.getRoot();
+                        Stage stage = new Stage();
+                        stage.setScene(new Scene(root));
+                        stage.show();
+                    }
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
             }
-            Parent root = fxmlLoader.getRoot();
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.show();
         });
     }
 
     private void signUpNewUser() {
+
         try {
             DBHandler dbHandler = new DBHandler();
             User user = new User(loginField.getText(), passwordField.getText(), 1, nameField.getText(), addressField.getText(), numberField.getText());

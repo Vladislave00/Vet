@@ -54,6 +54,22 @@ public class DBHandler {
         return rs;
     }
 
+    public void changeName(User user, String newName) throws SQLException {
+        String username = user.getUsername();
+        String password = user.getPassword();
+        String update = "UPDATE login SET username = '" + newName + "' WHERE username = '" + username + "' AND password = '" + password + "';";
+        PreparedStatement prst = connection.prepareStatement(update);
+        prst.executeUpdate();
+    }
+    public void changePassword(User user, String newPassword) throws SQLException, NoSuchAlgorithmException, InvalidKeySpecException {
+        String username = user.getUsername();
+        String password = user.getPassword();
+        newPassword = passwordHashing(newPassword);
+        String update = "UPDATE login SET password = '" + newPassword + "' WHERE username = '" + username + "' AND password = '" + password + "';";
+        PreparedStatement prst = connection.prepareStatement(update);
+        prst.executeUpdate();
+    }
+
     public static String passwordHashing(String password) throws NoSuchAlgorithmException, InvalidKeySpecException {
         SecureRandom random = new SecureRandom();
         byte[] salt = new byte[16];
@@ -67,12 +83,10 @@ public class DBHandler {
         return stringBuilder.toString();
     }
 
-    public boolean exists(String username) throws SQLException {
+    public static boolean exists(String username) throws SQLException {
         Statement statement = connection.createStatement();
         String query = "SELECT username, password, role FROM Users WHERE username = '" + username + "';";
         ResultSet result = statement.executeQuery(query);
         return result.next();
     }
-
-
 }

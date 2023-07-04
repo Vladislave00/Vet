@@ -51,11 +51,7 @@ public class Controller {
 
             try {
                 login(username, password);
-            } catch (NoSuchAlgorithmException e) {
-                throw new RuntimeException(e);
-            } catch (InvalidKeySpecException e) {
-                throw new RuntimeException(e);
-            } catch (SQLException e) {
+            } catch (NoSuchAlgorithmException | InvalidKeySpecException | SQLException e) {
                 throw new RuntimeException(e);
             }
 
@@ -83,10 +79,10 @@ public class Controller {
                 if (cnt == 1) {
                     changeScene("/doc.fxml");
                 }
-        }
-
-        if (cnt == 1) {
-            changeScene("/user.fxml");
+            case 3:
+                if (cnt == 1) {
+                    changeScene("/admin.fxml");
+                }
         }
     }
     public void changeScene(String path){
