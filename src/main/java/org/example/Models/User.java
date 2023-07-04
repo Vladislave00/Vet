@@ -7,6 +7,7 @@ public class User {
     private String name;
     private String address;
     private String number;
+    public static User USER;
 
     public User(String username, String password, int role, String name, String address, String number) {
         this.username = username;
@@ -17,6 +18,9 @@ public class User {
         this.number = number;
     }
 
+    public static void login(User user){
+        USER = user;
+    }
     public User() {
 
     }

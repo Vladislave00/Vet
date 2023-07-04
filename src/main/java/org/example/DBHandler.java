@@ -57,7 +57,15 @@ public class DBHandler {
     public void changeName(User user, String newName) throws SQLException {
         String username = user.getUsername();
         String password = user.getPassword();
-        String update = "UPDATE login SET username = '" + newName + "' WHERE username = '" + username + "' AND password = '" + password + "';";
+        String update = "UPDATE Users SET username = '" + newName + "' WHERE username = '" + username + "' AND password = '" + password + "';";
+        PreparedStatement prst = connection.prepareStatement(update);
+        prst.executeUpdate();
+    }
+
+    public void changeData(User user, String newName, String newAddr, String newPhone) throws SQLException {
+        String username = user.getUsername();
+        String password = user.getPassword();
+        String update = "UPDATE Users SET name = '" + newName + "', address = '" + newAddr + "', number = '" + newPhone + "' WHERE username = '" + username + "' AND password = '" + password + "';";
         PreparedStatement prst = connection.prepareStatement(update);
         prst.executeUpdate();
     }
@@ -65,7 +73,7 @@ public class DBHandler {
         String username = user.getUsername();
         String password = user.getPassword();
         newPassword = passwordHashing(newPassword);
-        String update = "UPDATE login SET password = '" + newPassword + "' WHERE username = '" + username + "' AND password = '" + password + "';";
+        String update = "UPDATE Users SET password = '" + newPassword + "' WHERE username = '" + username + "' AND password = '" + password + "';";
         PreparedStatement prst = connection.prepareStatement(update);
         prst.executeUpdate();
     }

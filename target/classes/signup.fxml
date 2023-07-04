@@ -17,7 +17,12 @@
             <TextField fx:id="nameField" layoutX="279.0" layoutY="180.0" prefHeight="26.0" prefWidth="242.0" promptText="ФИО" style="-fx-border-color: #09c6ff;" />
             <TextField fx:id="addressField" layoutX="279.0" layoutY="223.0" prefHeight="26.0" prefWidth="242.0" promptText="Адрес" style="-fx-border-color: #09c6ff;" />
             <TextField fx:id="numberField" layoutX="278.0" layoutY="267.0" prefHeight="26.0" prefWidth="242.0" promptText="Номер телефона" style="-fx-border-color: #09c6ff;" />
-            <Label fx:id="errorLaber" layoutX="296.0" layoutY="395.0" prefHeight="34.0" prefWidth="206.0" text="Не все данные введены верно" textAlignment="CENTER" textFill="#ef0c0c" visible="false">
+            <Label fx:id="errorLaber" layoutX="296.0" layoutY="395.0" prefHeight="34.0" prefWidth="206.0" text="Пароли не совпадают" textAlignment="CENTER" textFill="#ef0c0c" visible="false">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="errorLaber1" layoutX="296.0" layoutY="395.0" prefHeight="34.0" prefWidth="206.0" text="Это имя уже занято" textAlignment="CENTER" textFill="#ef0c0c" visible="false">
                <font>
                   <Font size="14.0" />
                </font>

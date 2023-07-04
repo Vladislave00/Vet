@@ -65,25 +65,13 @@ public class Controller {
         user.setUsername(username);
         user.setPassword(DBHandler.passwordHashing(password));
         ResultSet rs = dbHandler.getUser(user);
+        rs.next();
+        User user1 = new User(rs.getString(2),rs.getString(3),Integer.parseInt(rs.getString(4)),rs.getString(5),rs.getString(6),rs.getString(7));
         int role = Integer.parseInt(rs.getString(4));
-        int cnt = 0;
-        while (rs.next()) {
-            cnt++;
-        }
-        switch (role){
-            case 1:
-                if (cnt == 1) {
-                    changeScene("/user.fxml");
-                }
-            case 2:
-                if (cnt == 1) {
-                    changeScene("/doc.fxml");
-                }
-            case 3:
-                if (cnt == 1) {
-                    changeScene("/admin.fxml");
-                }
-        }
+        User.login(user1);
+        if (role == 1) changeScene("/user.fxml");
+        else if (role == 2) changeScene("/doc.fxml");
+        else if (role == 3) changeScene("/admin.fxml");
     }
     public void changeScene(String path){
         signInButton.getScene().getWindow().hide();
@@ -98,6 +86,6 @@ public class Controller {
         Parent root = fxmlLoader.getRoot();
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
-        stage.showAndWait();
+        stage.show();
     }
 }
