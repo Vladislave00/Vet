@@ -269,6 +269,7 @@ public class AdminController {
                 DBHandler dbHandler = new DBHandler();
                 User user = new User(nick, password, 2, name, addr, phone);
                 dbHandler.signup(user);
+                dbHandler.addDoctor(user);
                 regDocPane.setVisible(false);
             } catch (SQLException | NoSuchAlgorithmException | InvalidKeySpecException e) {
                 throw new RuntimeException(e);

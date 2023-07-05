@@ -5,6 +5,8 @@ import java.net.URL;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -18,10 +20,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import org.example.DBHandler;
-import org.example.Models.Animal;
-import org.example.Models.Breed;
-import org.example.Models.Owner;
-import org.example.Models.User;
+import org.example.Models.*;
 
 public class UserController {
 
@@ -136,9 +135,29 @@ public class UserController {
     @FXML
     private Button backAddPet;
 
+    @FXML
+    private TextField AppTime;
+
+    @FXML
+    private TextField AppDocName;
+
+    @FXML
+    private TextField AppPetName;
+
+    @FXML
+    private Button backA;
+
+    @FXML
+    private AnchorPane makeAppointmentPane;
 
     @FXML
     private Button submitAddPet;
+
+    @FXML
+    private Button regAppointment;
+
+    @FXML
+    private Button submitAppointment;
     @FXML
     void initialize() {
         changePasswordButton.setOnAction(actionEvent -> {
@@ -265,6 +284,29 @@ public class UserController {
                 throw new RuntimeException(e);
             }
         });
+
+        regAppointment.setOnAction(actionEvent -> {
+            makeAppointmentPane.setVisible(true);
+        });
+
+        backA.setOnAction(actionEvent -> {
+            makeAppointmentPane.setVisible(false);
+        });
+
+        submitAppointment.setOnAction(actionEvent -> {
+            String docname = AppDocName.getText();
+            String date = AppTime.getText();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+            LocalDateTime datetime = LocalDateTime.parse(date, formatter);
+            String petName = AppPetName.getText();
+            DBHandler dbHandler = new DBHandler();
+            try {
+                dbHandler.makeAppointment(docname, petName, datetime);
+                addPetPane.setVisible(false);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        });
     }
     public void changeScene(String path){
         mainPane.getScene().getWindow().hide();
@@ -282,7 +324,4 @@ public class UserController {
         stage.setTitle("MadCat");
         stage.show();
     }
-
-
-
 }

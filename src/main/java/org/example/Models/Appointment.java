@@ -2,6 +2,7 @@ package org.example.Models;
 
 import java.sql.Date;
 import java.sql.Time;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class Appointment {
@@ -9,15 +10,14 @@ public class Appointment {
     private Owner owner;
     private Animal animal;
     private ArrayList<Disease> diseases;
-    private Time time;
-    private Date date;
 
-    public Appointment(Doctor doctor, Owner owner, Animal animal, Time time, Date date) {
+    private LocalDateTime dateTime;
+
+    public Appointment(Doctor doctor, Owner owner, Animal animal, LocalDateTime dateTime) {
         this.doctor = doctor;
         this.owner = owner;
         this.animal = animal;
-        this.time = time;
-        this.date = date;
+        this.dateTime = dateTime;
     }
 
     public Doctor getDoctor() {
@@ -36,14 +36,6 @@ public class Appointment {
         return diseases;
     }
 
-    public Time getTime() {
-        return time;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
     public void setDoctor(Doctor doctor) {
         this.doctor = doctor;
     }
@@ -56,11 +48,15 @@ public class Appointment {
         this.animal = animal;
     }
 
-    public void setTime(Time time) {
-        this.time = time;
+    public LocalDateTime getDateTime() {
+        return dateTime;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setDiseases(ArrayList<Disease> diseases) {
+        this.diseases = diseases;
+    }
+
+    public void setDateTime(LocalDateTime dateTime) {
+        this.dateTime = dateTime;
     }
 }

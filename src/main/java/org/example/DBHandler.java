@@ -1,8 +1,6 @@
 package org.example;
 
-import org.example.Models.Animal;
-import org.example.Models.Owner;
-import org.example.Models.User;
+import org.example.Models.*;
 
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
@@ -11,6 +9,7 @@ import java.security.SecureRandom;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.KeySpec;
 import java.sql.*;
+import java.time.LocalDateTime;
 
 public class DBHandler {
     private static Connection connection;
@@ -134,6 +133,13 @@ public class DBHandler {
         Statement s6 = connection.createStatement();
         s6.executeUpdate(update1);
     }
+
+    public void addDoctor(User user) throws SQLException {
+        Doctor doc = new Doctor(user.getName(), user.getAddress(), user.getNumber());
+        String insert = "INSERT INTO Doctor(name, address, number) VALUES ('" + doc.getName() + "','" + doc.getAddress() + "','" + doc.getNumber() + "')";
+        Statement statement = connection.createStatement();
+        statement.executeUpdate(insert);
+    }
     public static boolean exists(String username) throws SQLException {
         Statement statement = connection.createStatement();
         String query = "SELECT username, password, role FROM Users WHERE username = '" + username + "';";
@@ -152,5 +158,44 @@ public class DBHandler {
         String query = "SELECT * FROM Breed WHERE name = '" + breed + "';";
         ResultSet result = statement.executeQuery(query);
         return result.next();
+    }
+
+    public void makeAppointment(String docname, String petName, LocalDateTime datetime) throws SQLException {
+        Statement s = connection.createStatement();
+        String select = "SELECT id, address, number FROM Doctor WHERE name = '" + docname + "';";
+        ResultSet rs = s.executeQuery(select);
+        rs.next();
+        int docId = rs.getInt("id");
+        String addr = rs.getString("address");
+        String number = rs.getString("number");
+        Doctor doctor = new Doctor(docname, addr, number);
+
+        Statement s1 = connection.createStatement();
+        String select1 = "SELECT id, id_breed FROM Animal WHERE name = '" + petName + "';";
+        ResultSet rs1 = s1.executeQuery(select1);
+        rs1.next();
+        int petId = rs1.getInt("id");
+        int breedId = rs1.getInt("id_breed");
+
+        Statement s2 = connection.createStatement();
+        String select2 = "SELECT name FROM Breed WHERE id = " + breedId + ";";
+        ResultSet rs2 = s2.executeQuery(select2);
+        rs2.next();
+        String breedname = rs2.getString("name");
+        Breed breed = new Breed(breedname);
+
+        Animal animal = new Animal(petName, breed, Owner.OWNER);
+
+        Appointment appointment = new Appointment(doctor, Owner.OWNER, animal, datetime);
+
+        Statement s3 = connection.createStatement();
+        String select3 = "SELECT id FROM animal_owner WHERE id_animal = " + petId + ";";
+        ResultSet rs3 = s3.executeQuery(select3);
+        rs3.next();
+        int ownship_id = rs3.getInt("id");
+
+        Statement s4 = connection.createStatement();
+        String insert = "INSERT INTO Appointment(id_doctor, id_animal_owner, date_time) VALUES ('" + docId + "','" + ownship_id + "','" + datetime + "')";
+        s4.executeUpdate(insert);
     }
 }

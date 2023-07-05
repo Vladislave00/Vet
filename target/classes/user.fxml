@@ -85,5 +85,14 @@
             <Button fx:id="submitAddPet" layoutX="324.0" layoutY="243.0" mnemonicParsing="false" prefHeight="15.0" prefWidth="150.0" style="-fx-background-color: #09c6ff;" text="Подтвердить" />
          </children>
       </AnchorPane>
+      <AnchorPane fx:id="makeAppointmentPane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: WHITE;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0">
+         <children>
+            <Button fx:id="backA" layoutX="31.0" layoutY="11.0" mnemonicParsing="false" text="Назад" />
+            <TextField fx:id="AppDocName" layoutX="275.0" layoutY="64.0" prefHeight="26.0" prefWidth="250.0" promptText="Имя врача" />
+            <TextField fx:id="AppPetName" layoutX="275.0" layoutY="117.0" prefHeight="26.0" prefWidth="250.0" promptText="Имя питомца" />
+            <TextField fx:id="AppTime" layoutX="275.0" layoutY="175.0" prefHeight="26.0" prefWidth="250.0" promptText="Дата и Время" />
+            <Button fx:id="submitAppointment" layoutX="349.0" layoutY="256.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="102.0" style="-fx-background-color: #09c6ff;" text="Записаться" />
+         </children>
+      </AnchorPane>
     </children>
 </AnchorPane>
