@@ -32,7 +32,6 @@
                         <Font name="Arial" size="24.0" />
                     </font>
                 </Label>
-            <Button fx:id="appointmentListB" layoutX="331.0" layoutY="200.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="138.0" style="-fx-background-color: #09c6ff;" text="Список приемов" />
             </children></AnchorPane>
         <Label layoutX="204.0" layoutY="31.0" prefHeight="54.0" prefWidth="390.0" text="Ветеринарная клиника &quot;MadCat&quot;" textAlignment="CENTER" textFill="#09c6ff">
             <font>

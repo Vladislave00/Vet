@@ -33,7 +33,6 @@
                </font>
             </Label>
             <Button fx:id="addPet" layoutX="319.0" layoutY="251.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="162.0" style="-fx-background-color: #09c6ff;" text="Добавить питомца" />
-            <Button fx:id="showPets" layoutX="319.0" layoutY="199.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="161.0" style="-fx-background-color: #09c6ff;" text="Показать моих питомцев" />
          </children></AnchorPane>
         <Label layoutX="204.0" layoutY="31.0" prefHeight="54.0" prefWidth="390.0" text="Ветеринарная клиника &quot;MadCat&quot;" textAlignment="CENTER" textFill="#09c6ff">
             <font>
