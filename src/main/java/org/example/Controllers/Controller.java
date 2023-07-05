@@ -15,6 +15,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import org.example.DBHandler;
+import org.example.Models.Doctor;
+import org.example.Models.Owner;
 import org.example.Models.User;
 
 public class Controller {
@@ -69,8 +71,14 @@ public class Controller {
         User user1 = new User(rs.getString(2),rs.getString(3),Integer.parseInt(rs.getString(4)),rs.getString(5),rs.getString(6),rs.getString(7));
         int role = Integer.parseInt(rs.getString(4));
         User.login(user1);
-        if (role == 1) changeScene("/user.fxml");
-        else if (role == 2) changeScene("/doc.fxml");
+        if (role == 1) {
+            Owner.OWNER = new Owner(User.USER.getName(), User.USER.getAddress(), User.USER.getNumber());
+            changeScene("/user.fxml");
+        }
+        else if (role == 2){
+            Doctor.DOC = new Doctor(User.USER.getName(), User.USER.getAddress(), User.USER.getNumber());
+            changeScene("/doc.fxml");
+        }
         else if (role == 3) changeScene("/admin.fxml");
     }
     public void changeScene(String path){
@@ -86,6 +94,7 @@ public class Controller {
         Parent root = fxmlLoader.getRoot();
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
+        stage.setTitle("MadCat");
         stage.show();
     }
 }

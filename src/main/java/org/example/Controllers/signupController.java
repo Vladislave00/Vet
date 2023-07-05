@@ -57,7 +57,7 @@ public class signupController {
         DBHandler.getConnection();
 
         signInButton.setOnAction(actionEvent -> {
-            if (!passwordField.equals(passwordField1)){
+            if (!passwordField.getText().equals(passwordField1.getText())){
                 errorLaber1.setVisible(false);
                 errorLaber.setVisible(true);
             } else {
@@ -80,6 +80,7 @@ public class signupController {
                         Parent root = fxmlLoader.getRoot();
                         Stage stage = new Stage();
                         stage.setScene(new Scene(root));
+                        stage.setTitle("MadCat");
                         stage.show();
                     }
                 } catch (SQLException e) {

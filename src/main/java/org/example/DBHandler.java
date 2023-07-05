@@ -1,5 +1,7 @@
 package org.example;
 
+import org.example.Models.Animal;
+import org.example.Models.Owner;
 import org.example.Models.User;
 
 import javax.crypto.SecretKeyFactory;
@@ -91,9 +93,63 @@ public class DBHandler {
         return stringBuilder.toString();
     }
 
+    public void addPet(Animal pet) throws SQLException {
+        if (!existsOwner(Owner.OWNER)){
+            String insert1 = "INSERT INTO Owner(name, address, number) VALUES ('" + Owner.OWNER.getName() + "','" + Owner.OWNER.getAddress() + "','" + Owner.OWNER.getNumber() + "')";
+            PreparedStatement prst1 = connection.prepareStatement(insert1);
+            prst1.executeUpdate();
+        }
+        if (!existsBreed(pet.getBreed().getName())){
+            String insert2 = "INSERT INTO Breed(name) VALUES ('" + pet.getBreed().getName() + "')";
+            PreparedStatement prst2 = connection.prepareStatement(insert2);
+            prst2.executeUpdate();
+        }
+        Statement s3 = connection.createStatement();
+        String select2 = "SELECT id FROM Breed WHERE name = '" + pet.getBreed().getName() + "';";
+        ResultSet rs3 = s3.executeQuery(select2);
+        rs3.next();
+        int breedId = rs3.getInt("id");
+        String insert = "INSERT INTO Animal(name, id_breed) VALUES ('" + pet.getName() + "','" + breedId + "')";
+        PreparedStatement prst = connection.prepareStatement(insert);
+        prst.executeUpdate();
+        Statement s = connection.createStatement();
+        Statement s1 = connection.createStatement();
+        Statement s2 = connection.createStatement();
+        String select = "SELECT id FROM Owner WHERE name = '" + Owner.OWNER.getName() + "';";
+        String select1 = "SELECT id FROM Animal WHERE name = '" + pet.getName() + "';";
+        ResultSet rs1 = s.executeQuery(select);
+        ResultSet rs2 = s1.executeQuery(select1);
+        rs1.next();
+        rs2.next();
+        int ownerId = rs1.getInt("id");
+        int petId = rs2.getInt("id");
+        String insert1 = "INSERT INTO animal_owner(id_owner, id_animal) VALUES ('" + ownerId+ "','" + petId + "')";
+        s2.executeUpdate(insert1);
+        String select3 = "SELECT id FROM animal_owner WHERE id_owner = '" + ownerId + "' AND id_animal = '" + petId + "';";
+        Statement s4 = connection.createStatement();
+        ResultSet rs4 = s4.executeQuery(select3);
+        rs4.next();
+        int ownshipId = rs4.getInt("id");
+        String update1 = "UPDATE Animal SET ownship_id = '" + ownshipId+ "' WHERE id = '" + petId + "';";
+        Statement s6 = connection.createStatement();
+        s6.executeUpdate(update1);
+    }
     public static boolean exists(String username) throws SQLException {
         Statement statement = connection.createStatement();
         String query = "SELECT username, password, role FROM Users WHERE username = '" + username + "';";
+        ResultSet result = statement.executeQuery(query);
+        return result.next();
+    }
+
+    public static boolean existsOwner(Owner owner) throws SQLException {
+        Statement statement = connection.createStatement();
+        String query = "SELECT * FROM Owner WHERE name = '" + owner.getName() + "';";
+        ResultSet result = statement.executeQuery(query);
+        return result.next();
+    }
+    public static boolean existsBreed(String breed) throws SQLException {
+        Statement statement = connection.createStatement();
+        String query = "SELECT * FROM Breed WHERE name = '" + breed + "';";
         ResultSet result = statement.executeQuery(query);
         return result.next();
     }

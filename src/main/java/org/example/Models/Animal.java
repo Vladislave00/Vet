@@ -12,6 +12,7 @@ public class Animal {
         this.owner = owner;
     }
 
+
     public String getName() {
         return name;
     }

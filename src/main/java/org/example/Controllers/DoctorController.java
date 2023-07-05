@@ -236,6 +236,7 @@ public class DoctorController {
         Parent root = fxmlLoader.getRoot();
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
+        stage.setTitle("MadCat");
         stage.show();
     }
 }

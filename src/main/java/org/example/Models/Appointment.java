@@ -2,20 +2,20 @@ package org.example.Models;
 
 import java.sql.Date;
 import java.sql.Time;
+import java.util.ArrayList;
 
 public class Appointment {
     private Doctor doctor;
     private Owner owner;
     private Animal animal;
-    private Disease[] diseases;
+    private ArrayList<Disease> diseases;
     private Time time;
     private Date date;
 
-    public Appointment(Doctor doctor, Owner owner, Animal animal, Disease[] diseases, Time time, Date date) {
+    public Appointment(Doctor doctor, Owner owner, Animal animal, Time time, Date date) {
         this.doctor = doctor;
         this.owner = owner;
         this.animal = animal;
-        this.diseases = diseases;
         this.time = time;
         this.date = date;
     }
@@ -32,7 +32,7 @@ public class Appointment {
         return animal;
     }
 
-    public Disease[] getDiseases() {
+    public ArrayList<Disease> getDiseases() {
         return diseases;
     }
 
@@ -54,10 +54,6 @@ public class Appointment {
 
     public void setAnimal(Animal animal) {
         this.animal = animal;
-    }
-
-    public void setDiseases(Disease[] diseases) {
-        this.diseases = diseases;
     }
 
     public void setTime(Time time) {

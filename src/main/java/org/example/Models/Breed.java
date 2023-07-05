@@ -1,7 +1,7 @@
 package org.example.Models;
 
 public class Breed {
-    public String name;
+    private String name;
 
     public Breed(String name) {
         this.name = name;

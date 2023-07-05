@@ -18,6 +18,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import org.example.DBHandler;
+import org.example.Models.Animal;
+import org.example.Models.Breed;
+import org.example.Models.Owner;
 import org.example.Models.User;
 
 public class UserController {
@@ -118,7 +121,24 @@ public class UserController {
     @FXML
     private Button backP;
 
+    @FXML
+    private Button addPet;
 
+    @FXML
+    private TextField addPetBreedF;
+
+    @FXML
+    private TextField addPetNameF;
+
+    @FXML
+    private AnchorPane addPetPane;
+
+    @FXML
+    private Button backAddPet;
+
+
+    @FXML
+    private Button submitAddPet;
     @FXML
     void initialize() {
         changePasswordButton.setOnAction(actionEvent -> {
@@ -224,7 +244,27 @@ public class UserController {
             profilePane.setVisible(false);
         });
 
+        addPet.setOnAction(actionEvent -> {
+            addPetPane.setVisible(true);
+        });
 
+        backAddPet.setOnAction(actionEvent -> {
+            addPetPane.setVisible(false);
+        });
+
+        submitAddPet.setOnAction(actionEvent -> {
+            String name = addPetNameF.getText();
+            Breed breed = new Breed(addPetBreedF.getText());
+            Owner owner = new Owner(User.USER.getName(), User.USER.getAddress(), User.USER.getNumber());
+            Animal pet = new Animal(name, breed, owner);
+            DBHandler dbHandler = new DBHandler();
+            try {
+                dbHandler.addPet(pet);
+                addPetPane.setVisible(false);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        });
     }
     public void changeScene(String path){
         mainPane.getScene().getWindow().hide();
@@ -239,6 +279,7 @@ public class UserController {
         Parent root = fxmlLoader.getRoot();
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
+        stage.setTitle("MadCat");
         stage.show();
     }
 

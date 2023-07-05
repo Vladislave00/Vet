@@ -1,7 +1,38 @@
 package org.example.Models;
 
 public class Doctor {
-    public String name;
-    public String address;
-    public String number;
+    private String name;
+    private String address;
+    private String number;
+    public static Doctor DOC;
+
+    public Doctor(String name, String address, String number) {
+        this.name = name;
+        this.address = address;
+        this.number = number;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public String getNumber() {
+        return number;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
+    }
 }
