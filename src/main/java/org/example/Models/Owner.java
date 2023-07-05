@@ -7,8 +7,6 @@ public class Owner {
     private String address;
     private String number;
 
-    private ArrayList<Animal> pets;
-
     public static Owner OWNER;
 
     public Owner(String name, String address, String number) {
@@ -16,15 +14,7 @@ public class Owner {
         this.address = address;
         this.number = number;
     }
-
-    public ArrayList<Animal> getPets() {
-        return pets;
-    }
-
-    public void setPets(ArrayList<Animal> pets) {
-        this.pets = pets;
-    }
-
+    
     public String getName() {
         return name;
     }
