@@ -54,7 +54,6 @@ public class signupController {
 
     @FXML
     void initialize() {
-        DBHandler.getConnection();
 
         signInButton.setOnAction(actionEvent -> {
             if (!passwordField.getText().equals(passwordField1.getText())){
@@ -93,9 +92,8 @@ public class signupController {
     private void signUpNewUser() {
 
         try {
-            DBHandler dbHandler = new DBHandler();
             User user = new User(loginField.getText(), passwordField.getText(), 1, nameField.getText(), addressField.getText(), numberField.getText());
-            dbHandler.signup(user);
+            DBHandler.dbHandler.signup(user);
         } catch (SQLException | NoSuchAlgorithmException | InvalidKeySpecException e) {
             throw new RuntimeException(e);
         }

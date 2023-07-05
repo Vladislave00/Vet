@@ -16,6 +16,8 @@ public class DBHandler {
     private static final String DB_URL = "jdbc:mysql://std-mysql.ist.mospolytech.ru:3306/std_2294_kurs";
     private static final String DB_USER = "std_2294_kurs";
     private static final String DB_PASSWORD = "vladikkk848";
+
+    public static DBHandler dbHandler;
     public DBHandler() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -47,12 +49,14 @@ public class DBHandler {
         prst.executeUpdate();
     }
 
-    public ResultSet getUser(User user) throws NoSuchAlgorithmException, InvalidKeySpecException, SQLException {
+    public User getUser(String username, String password) throws NoSuchAlgorithmException, InvalidKeySpecException, SQLException {
         ResultSet rs;
-        String select = "SELECT * FROM Users WHERE username = '" + user.getUsername() + "' AND password = '" + user.getPassword() + "';";
+        String select = "SELECT * FROM Users WHERE username = '" + username+ "' AND password = '" + password+ "';";
         PreparedStatement prst = connection.prepareStatement(select);
         rs = prst.executeQuery();
-        return rs;
+        rs.next();
+        User user = new User(username, password, rs.getInt("role"), rs.getString("name"), rs.getString("address"), rs.getString("number"));
+        return user;
     }
 
     public void changeName(User user, String newName) throws SQLException {

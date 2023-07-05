@@ -178,9 +178,8 @@ public class UserController {
 
             try {
                 if (Objects.equals(DBHandler.passwordHashing(old), User.USER.getPassword())){
-                    DBHandler dbHandler = new DBHandler();
                     try {
-                        dbHandler.changePassword(User.USER, newP);
+                        DBHandler.dbHandler.changePassword(User.USER, newP);
                         User.USER.setPassword(newP);
                     } catch (SQLException | NoSuchAlgorithmException | InvalidKeySpecException e) {
                         throw new RuntimeException(e);
@@ -202,9 +201,8 @@ public class UserController {
 
             try {
                 if (Objects.equals(DBHandler.passwordHashing(p), User.USER.getPassword())){
-                    DBHandler dbHandler = new DBHandler();
                     try {
-                        dbHandler.changeName(User.USER, nick);
+                        DBHandler.dbHandler.changeName(User.USER, nick);
                         User.USER.setUsername(nick);
                     } catch (SQLException e) {
                         throw new RuntimeException(e);
@@ -227,9 +225,8 @@ public class UserController {
             String p = passwordData.getText();
             try {
                 if (Objects.equals(DBHandler.passwordHashing(p), User.USER.getPassword())){
-                    DBHandler dbHandler = new DBHandler();
                     try {
-                        dbHandler.changeData(User.USER, newname, newAddr, newNum);
+                        DBHandler.dbHandler.changeData(User.USER, newname, newAddr, newNum);
                         User.USER.setName(newname);
                         User.USER.setAddress(newAddr);
                         User.USER.setNumber(newNum);
@@ -299,10 +296,9 @@ public class UserController {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
             LocalDateTime datetime = LocalDateTime.parse(date, formatter);
             String petName = AppPetName.getText();
-            DBHandler dbHandler = new DBHandler();
             try {
-                dbHandler.makeAppointment(docname, petName, datetime);
-                addPetPane.setVisible(false);
+                DBHandler.dbHandler.makeAppointment(docname, petName, datetime);
+                makeAppointmentPane.setVisible(false);
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }

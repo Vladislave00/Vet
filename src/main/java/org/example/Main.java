@@ -13,9 +13,9 @@ import java.sql.SQLException;
 public class Main extends Application{
 
     public static void main(String[] args) throws SQLException {
-        DBHandler dbHandler = new DBHandler();
+        DBHandler.dbHandler = new DBHandler();
         launch(args);
-        dbHandler.closeConnection();
+        DBHandler.dbHandler.closeConnection();
     }
 
     @Override

@@ -50,36 +50,26 @@ public class Controller {
             String username = loginField.getText().trim();
             String password = passwordField.getText().trim();
 
-
             try {
                 login(username, password);
             } catch (NoSuchAlgorithmException | InvalidKeySpecException | SQLException e) {
                 throw new RuntimeException(e);
             }
-
-
         });
     }
 
     private void login(String username, String password) throws NoSuchAlgorithmException, InvalidKeySpecException, SQLException {
-        DBHandler dbHandler = new DBHandler();
-        User user = new User();
-        user.setUsername(username);
-        user.setPassword(DBHandler.passwordHashing(password));
-        ResultSet rs = dbHandler.getUser(user);
-        rs.next();
-        User user1 = new User(rs.getString(2),rs.getString(3),Integer.parseInt(rs.getString(4)),rs.getString(5),rs.getString(6),rs.getString(7));
-        int role = Integer.parseInt(rs.getString(4));
-        User.login(user1);
-        if (role == 1) {
+        User user = DBHandler.dbHandler.getUser(username, DBHandler.passwordHashing(password));
+        User.login(user);
+        if (user.getRole() == 1) {
             Owner.OWNER = new Owner(User.USER.getName(), User.USER.getAddress(), User.USER.getNumber());
             changeScene("/user.fxml");
         }
-        else if (role == 2){
+        else if (user.getRole() == 2){
             Doctor.DOC = new Doctor(User.USER.getName(), User.USER.getAddress(), User.USER.getNumber());
             changeScene("/doc.fxml");
         }
-        else if (role == 3) changeScene("/admin.fxml");
+        else if (user.getRole() == 3) changeScene("/admin.fxml");
     }
     public void changeScene(String path){
         signInButton.getScene().getWindow().hide();

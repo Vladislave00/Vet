@@ -150,9 +150,8 @@ public class DoctorController {
 
             try {
                 if (Objects.equals(DBHandler.passwordHashing(old), User.USER.getPassword())){
-                    DBHandler dbHandler = new DBHandler();
                     try {
-                        dbHandler.changePassword(User.USER, newP);
+                        DBHandler.dbHandler.changePassword(User.USER, newP);
                         User.USER.setPassword(newP);
                     } catch (SQLException | NoSuchAlgorithmException | InvalidKeySpecException e) {
                         throw new RuntimeException(e);
@@ -173,9 +172,8 @@ public class DoctorController {
 
             try {
                 if (Objects.equals(DBHandler.passwordHashing(p), User.USER.getPassword())){
-                    DBHandler dbHandler = new DBHandler();
                     try {
-                        dbHandler.changeName(User.USER, nick);
+                        DBHandler.dbHandler.changeName(User.USER, nick);
                         User.USER.setUsername(nick);
                     } catch (SQLException e) {
                         throw new RuntimeException(e);
@@ -198,9 +196,8 @@ public class DoctorController {
             String p = passwordData.getText();
             try {
                 if (Objects.equals(DBHandler.passwordHashing(p), User.USER.getPassword())){
-                    DBHandler dbHandler = new DBHandler();
                     try {
-                        dbHandler.changeData(User.USER, newname, newAddr, newNum);
+                        DBHandler.dbHandler.changeData(User.USER, newname, newAddr, newNum);
                         User.USER.setName(newname);
                         User.USER.setAddress(newAddr);
                         User.USER.setNumber(newNum);
@@ -259,9 +256,8 @@ public class DoctorController {
             for (int i = 0; i < diseases.length; i++) {
                 diseases[i] = diseases[i].trim();
             }
-            DBHandler dbHandler = new DBHandler();
             try {
-                dbHandler.startAppointment(aId, diseases);
+                DBHandler.dbHandler.startAppointment(aId, diseases);
                 appointmentPane.setVisible(false);
             } catch (SQLException e) {
                 throw new RuntimeException(e);
