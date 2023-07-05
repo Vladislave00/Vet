@@ -198,4 +198,41 @@ public class DBHandler {
         String insert = "INSERT INTO Appointment(id_doctor, id_animal_owner, date_time) VALUES ('" + docId + "','" + ownship_id + "','" + datetime + "')";
         s4.executeUpdate(insert);
     }
+
+    public void startAppointment(int aId, String[] diseases) throws SQLException {
+        Statement s = connection.createStatement();
+        String select = "SELECT id, name FROM Breed where id = (SELECT id_breed FROM Animal where id = (SELECT id_animal FROM animal_owner where id = (SELECT id_animal_owner FROM Appointment WHERE id = '" + aId + "')));";
+        ResultSet rs = s.executeQuery(select);
+        rs.next();
+        String breedname = rs.getString("name");
+        int breedId = rs.getInt("id");
+
+        for (int i = 0; i < diseases.length; i++) {
+            Statement s1 = connection.createStatement();
+            String select1 = "SELECT id FROM Disease WHERE name = '" + diseases[i] + "';";
+            ResultSet rs1 = s1.executeQuery(select1);
+            rs1.next();
+            int disease_id = rs1.getInt("id");
+            if (!existsBreedDisease(breedId, disease_id)){
+                Statement s4 = connection.createStatement();
+                String insert1 = "INSERT INTO Breed_Disease(id_breed, id_disease, count) VALUES ('" + breedId + "','" + disease_id + "'," + 1 + ")";
+                s4.executeUpdate(insert1);
+            }
+            else {
+                Statement s4 = connection.createStatement();
+                String update = "UPDATE Breed_Disease SET count = count + 1 WHERE id_breed = " + breedId + " AND id_disease = " + disease_id + "";
+                s4.executeUpdate(update);
+            }
+            Statement s3 = connection.createStatement();
+            String insert = "INSERT INTO Appointment_Disease(id_appointment, id_disease) VALUES ('" + aId + "','" + disease_id + "')";
+            s3.executeUpdate(insert);
+        }
+    }
+
+    public static boolean existsBreedDisease(int breed_id, int disease_id) throws SQLException {
+        Statement statement = connection.createStatement();
+        String query = "SELECT * FROM Breed_Disease WHERE id_breed = " + breed_id + " AND id_disease = " + disease_id + ";";
+        ResultSet result = statement.executeQuery(query);
+        return result.next();
+    }
 }

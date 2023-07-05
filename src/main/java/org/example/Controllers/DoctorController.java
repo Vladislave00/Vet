@@ -119,6 +119,27 @@ public class DoctorController {
     private Button backP;
 
     @FXML
+    private Button appointmemtFinish;
+
+    @FXML
+    private TextField appointmentIdF;
+
+    @FXML
+    private Button appointmentListB;
+
+    @FXML
+    private AnchorPane appointmentPane;
+
+    @FXML
+    private Button appointmentStartB;
+
+    @FXML
+    private Button backAppointment;
+
+    @FXML
+    private TextField diseasesF;
+
+    @FXML
     void initialize() {
         changePasswordButton.setOnAction(actionEvent -> {
             changePasswordPane.setVisible(true);
@@ -221,6 +242,30 @@ public class DoctorController {
         });
         backN.setOnAction(actionEvent -> {
             changeNickPane.setVisible(false);
+        });
+
+        appointmentStartB.setOnAction(actionEvent -> {
+            appointmentPane.setVisible(true);
+        });
+
+        backAppointment.setOnAction(actionEvent -> {
+            appointmentPane.setVisible(false);
+        });
+
+        appointmemtFinish.setOnAction(actionEvent -> {
+            int aId = Integer.parseInt(appointmentIdF.getText());
+            String[] diseases;
+            diseases = diseasesF.getText().split(";");
+            for (int i = 0; i < diseases.length; i++) {
+                diseases[i] = diseases[i].trim();
+            }
+            DBHandler dbHandler = new DBHandler();
+            try {
+                dbHandler.startAppointment(aId, diseases);
+                appointmentPane.setVisible(false);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
         });
     }
     public void changeScene(String path){
