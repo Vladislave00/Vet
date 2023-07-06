@@ -11,6 +11,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import org.example.DBHandler;
+import org.example.Models.Doctor;
 import org.example.Models.User;
 
 import java.io.IOException;
@@ -141,6 +142,7 @@ public class DoctorController {
 
     @FXML
     void initialize() {
+        Doctor doctor = new Doctor();
         changePasswordButton.setOnAction(actionEvent -> {
             changePasswordPane.setVisible(true);
         });
@@ -218,9 +220,9 @@ public class DoctorController {
         showProfileButton.setOnAction(actionEvent -> {
             profilePane.setVisible(true);
             nickLabel.setText(User.USER.getUsername());
-            nameLabel.setText(User.USER.getName());
-            addrLabel.setText(User.USER.getAddress());
-            phoneLabel.setText(User.USER.getNumber());
+            nameLabel.setText(Doctor.DOC.getName());
+            addrLabel.setText(Doctor.DOC.getAddress());
+            phoneLabel.setText(Doctor.DOC.getNumber());
             int role = User.USER.getRole();
             if (role == 1) roleLabel.setText("Роль: Пользователь");
             else if (role == 2) roleLabel.setText("Роль: Врач");

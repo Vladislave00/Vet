@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -19,7 +18,7 @@ import org.example.Models.Doctor;
 import org.example.Models.Owner;
 import org.example.Models.User;
 
-public class Controller {
+public class SignInController {
 
 
     @FXML

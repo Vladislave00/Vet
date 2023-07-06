@@ -273,9 +273,8 @@ public class UserController {
             Breed breed = new Breed(addPetBreedF.getText());
             Owner owner = new Owner(User.USER.getName(), User.USER.getAddress(), User.USER.getNumber());
             Animal pet = new Animal(name, breed, owner);
-            DBHandler dbHandler = new DBHandler();
             try {
-                dbHandler.addPet(pet);
+                DBHandler.dbHandler.addPet(pet);
                 addPetPane.setVisible(false);
             } catch (SQLException e) {
                 throw new RuntimeException(e);

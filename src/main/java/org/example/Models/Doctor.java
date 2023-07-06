@@ -12,6 +12,9 @@ public class Doctor {
         this.number = number;
     }
 
+    public Doctor() {
+    }
+
     public String getName() {
         return name;
     }

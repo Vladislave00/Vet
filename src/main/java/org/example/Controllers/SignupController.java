@@ -17,7 +17,7 @@ import javafx.stage.Stage;
 import org.example.DBHandler;
 import org.example.Models.User;
 
-public class signupController {
+public class SignupController {
 
     @FXML
     private ResourceBundle resources;
